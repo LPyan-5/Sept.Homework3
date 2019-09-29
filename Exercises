@@ -271,7 +271,7 @@ Validation:
 
 function password(value){
  
-        let passw= new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{6,16}$/);
+        let passw= new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$]).{6,16}$/);
         if(passw.test(value)) 
         { 
         console.log('Valid.');
