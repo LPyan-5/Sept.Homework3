@@ -1,0 +1,264 @@
+//Exercise 1
+Given a phone number. Write a function to clean it up, so it is valid.
+The rules are as follows:
+If the phone number is less than 10 digits assume that it is a bad number
+If the phone number is longer than 10, then it is a bad number
+If the phone number is 10 digits assume that it is good
+If the phone number consists of 11 symbols and the first one is + and others are
+numbers, then trim + and return remaining 10 digits.
+If the phone number contains + symbol more than one, consider it as a bad number.
+If the phone number contains + symbol not as the first character, consider it as a bad
+number.
+Ignore spaces between digits.
+
+
+function validPhoneNumber(str){
+    str = str.replace(/\s/g,''); //regular expression-i es masy search em arel)) 
+    if(str.length>11||str.length<10){
+        console.log('Bad number');
+        return;
+    }
+    else
+        if(str.length===10){
+            if(str.indexOf("+")===-1){
+                for(let i=0; i<str.length; i++){
+                    Number(str[i]);
+                    if(isNaN(str[i])){
+                     
+                        console.log('Bad number');
+                        return;
+                    }
+                   
+                }
+              
+                    console.log(str);
+                    return;
+            }   
+            else{
+                console.log('Bad number');
+                return;
+            }
+        
+    }
+    else
+        if(str.startsWith("+")&&!str.includes("+",1)){
+            for(let i=1; i<str.length; i++){
+                str[i]=Number(str[i]);
+                if(isNaN(str[i])){
+                   
+                    console.log('Bad number');
+                    return;
+                }
+                
+            }   
+            console.log(str.slice(1,str.length));
+                return;
+        }
+        else{
+            console.log('Bad number');
+            return;
+        }
+        
+    
+}
+validPhoneNumber('455668985 3');
+validPhoneNumber('+00 085 98962');
+
+
+
+//Exercise 2
+Write a function, which will receive a number between 0 to 999,999 and spell out that
+number in English.
+
+//I wrote two functions(subTens() and subHundreds()) and call them in the spellTheNumber() function. 
+//subTens()
+function subTens(num){
+    let a=['zero','one','two','three','four','five','six','seven','eight','nine'];
+    let aa=['','eleven','twelve',	'thirteen',	'fourteen','fifteen',	'sixteen',	'seventeen','eighteen','nineteen'];
+    let b=['', 'ten', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+        let n=num%10;
+        if(n===0){
+            num=Math.floor(num/10);
+            return(b[num]);
+            
+        }
+        else
+        if(num<20){
+            //num=Math.floor(num/10);
+            return(aa[n]);
+            
+        }
+        else{
+            num=Math.floor(num/10);
+            return(b[num]+' '+a[n]);
+            
+        } 
+}
+
+
+//subHundreds()
+function subHundreds(num){
+    let a=['zero','one','two','three','four','five','six','seven','eight','nine'];
+    let aa=['','eleven','twelve',	'thirteen',	'fourteen','fifteen',	'sixteen',	'seventeen','eighteen','nineteen'];
+    let b=['', 'ten', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+    
+    let n=num%100;
+    if(n===0){
+        num=Math.floor(num/100);
+        return(a[num]+' hundred ');
+        
+    }
+    else if(n<10){
+        num=Math.floor(num/100);
+        return (a[num]+' hundred '+a[n]);
+        
+    }
+    else{
+        let k=n%10;
+        if(k===0){
+            n=n/10;
+            num=Math.floor(num/100);
+            return (a[num]+' hundred '+b[n]);
+            
+        }
+        else
+        if(n<20){
+            n=n%10;
+            num=Math.floor(num/100);
+            return (a[num]+' hundred '+aa[n]);
+            
+        }
+        else{
+            let k=n%10;
+            n=Math.floor(n/10);
+            num=Math.floor(num/100);
+            return (a[num]+ ' hundred '+b[n]+' '+a[k]);
+            
+        }
+
+
+        
+
+    }
+}
+
+//spellTheNumber()
+function spellTheNumber(num){
+    if(num<0||num>999999){
+        console.log('Oops.');
+        return;
+    }
+    let a=['zero','one','two','three','four','five','six','seven','eight','nine'];
+    let s,ss;
+   
+    if(num<10){
+        console.log(a[num]);
+        return;
+    }
+    
+else
+    if(num<=99){
+        s=subTens(num);
+        console.log(s);
+        return;
+    }
+
+else
+    if(num<999){
+        s=subHundreds(num);
+        console.log(s);
+        return;
+    }
+    else
+        if(num<9999){
+            
+             let n=num%1000;
+             if(n===0){
+                num=Math.floor(num/1000);
+                console.log(a[num]+' thousand');
+                return;
+             }
+             else{
+             num=Math.floor(num/1000);
+             s=subHundreds(n);
+             console.log(a[num]+' thousand '+s);
+             return;
+             }
+
+        }
+        else
+        if(num<99999){
+        
+            let n=num%1000;
+            num=Math.floor(num/1000);
+            s=subTens(num);
+            if(n===0){
+                
+                console.log(s+' thousand');
+            }
+            else
+            if(n<100){
+            
+            
+            
+            ss=subTens(n);
+            console.log(s+' thousand '+ss);
+            return;
+            }
+            else{
+               
+            
+            
+            ss=subHundreds(n);
+            console.log(s+' thousand '+ss);
+            return;
+            }
+
+        }
+        else
+        //999999
+        {   
+            n=num%1000;
+            num=Math.floor(num/1000);
+            s=subHundreds(num);
+            if(n===0){
+               
+                console.log(s+' thousand');
+            }
+
+            else
+            if(n<100){
+                ss=subTens(n);
+                console.log(s+' thousand '+ss);
+                return;
+            }
+            else{
+           
+            ss=subHundreds(n);
+            console.log(s+' thousand '+ss);
+            
+        }
+    }
+    
+    
+}
+
+
+spellTheNumber(0);
+spellTheNumber(12);
+spellTheNumber(18);
+spellTheNumber(36);
+spellTheNumber(500);
+spellTheNumber(550);
+spellTheNumber(515);
+spellTheNumber(556);
+spellTheNumber(2000);
+spellTheNumber(2400);
+spellTheNumber(25096);
+spellTheNumber(101206);
+
+
+
+
+
+
