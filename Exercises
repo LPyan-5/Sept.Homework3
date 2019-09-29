@@ -164,13 +164,13 @@ else
     }
 
 else
-    if(num<999){
+    if(num<=999){
         s=subHundreds(num);
         console.log(s);
         return;
     }
     else
-        if(num<9999){
+        if(num<=9999){
             
              let n=num%1000;
              if(n===0){
@@ -187,7 +187,7 @@ else
 
         }
         else
-        if(num<99999){
+        if(num<=99999){
         
             let n=num%1000;
             num=Math.floor(num/1000);
