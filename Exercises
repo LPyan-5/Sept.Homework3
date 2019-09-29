@@ -22,8 +22,8 @@ function validPhoneNumber(str){
         if(str.length===10){
             if(str.indexOf("+")===-1){
                 
-                   str=Number(str);
-                    if(isNaN(str)){
+                   let s=Number(str);
+                    if(isNaN(s)){
                      
                         console.log('Bad number');
                         return;
@@ -44,8 +44,8 @@ function validPhoneNumber(str){
         if(str.startsWith("+")&&!str.includes("+",1)){
             
             str=str.slice(1,str.length);
-            let s=str;
-            s=Number(str);
+            let s=Number(str);
+            
             if(isNaN(s)){
                    
                     console.log('Bad number');
