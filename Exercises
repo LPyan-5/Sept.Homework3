@@ -13,7 +13,7 @@ Ignore spaces between digits.
 
 
 function validPhoneNumber(str){
-    str = str.replace(/\s/g,''); //regular expression-i es masy search em arel)) 
+    str = str.replace(/\s/g,'');
     if(str.length>11||str.length<10){
         console.log('Bad number');
         return;
@@ -21,13 +21,13 @@ function validPhoneNumber(str){
     else
         if(str.length===10){
             if(str.indexOf("+")===-1){
-                for(let i=0; i<str.length; i++){
-                   str[i] = Number(str[i]);
-                    if(isNaN(str[i])){
+                
+                   str=Number(str);
+                    if(isNaN(str)){
                      
                         console.log('Bad number');
                         return;
-                    }
+                    
                    
                 }
               
@@ -42,16 +42,18 @@ function validPhoneNumber(str){
     }
     else
         if(str.startsWith("+")&&!str.includes("+",1)){
-            for(let i=1; i<str.length; i++){
-                str[i]=Number(str[i]);
-                if(isNaN(str[i])){
+            
+            str=str.slice(1,str.length);
+            let s=str;
+            s=Number(str);
+            if(isNaN(s)){
                    
                     console.log('Bad number');
                     return;
                 }
                 
-            }   
-            console.log(str.slice(1,str.length));
+               
+            console.log(str);
                 return;
         }
         else{
